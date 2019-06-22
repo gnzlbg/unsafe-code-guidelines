@@ -53,7 +53,7 @@ For some more information, see [this blog post](https://www.ralfj.de/blog/2018/0
 
 #### Layout
 
-The *layout* of a type defines its size and alignment as well as the offsets of its subobjects (e.g. fields of structs/unions/enum/... or elements of arrays).
+The *layout* of a type defines its size and alignment as well as the offsets of its subobjects (e.g. fields of structs/unions/enum/... or elements of arrays) and the padding between them which introduces niches.
 Moreover, the layout of a type records its *function call ABI* (or just *ABI* for short): how the type is passed *by value* across a function boundary.
 
 Note: Originally, *layout* and *representation* were treated as synonyms, and Rust language features like the `#[repr]` attribute reflect this. 
