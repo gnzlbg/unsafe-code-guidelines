@@ -3,11 +3,12 @@
 ## Layout of Rust array types 
 
 Array types, `[T; N]`, store `N` values of type `T` with a constant _stride_.
-Here, _stride_ is the distance between each pair of consecutive values within
-the array.
 
-The _offset_ of the first array element is `0`, that is, a pointer to the array
-and a pointer to its first element both point to the same memory address.
+The _stride_ is the distance between each pair of consecutive values within the
+array. The stride is constant, and is computed as the _size_ of the element type
+rounded up to the next multiple of the _alignment_ of the element type.
+
+The _size_ of an array `[T; N]` is `stride::<[T; N]>() * N`.
 
 The _alignment_ of array types is greater or equal to the alignment of its
 element type. If the element type is `repr(C)` the layout of the array is
@@ -21,9 +22,8 @@ guaranteed to be the same as the layout of a C array with the same element type.
 > }`. Pointers to arrays are fine: `extern { fn foo(x: *const [T; N]) -> *const
 > [U; M]; }`, and `struct`s and `union`s containing arrays are also fine.
 
-The _stride_ of the array is constant for all element pairs and it is computed
-as the _size_ of the element type rounded up to the next multiple of the
-_alignment_ of the element type.
+The _offset_ of the first array element is `0`, that is, a pointer to the array
+and a pointer to its first element both point to the same memory address.
 
 ### Special case `stride == size`
 
