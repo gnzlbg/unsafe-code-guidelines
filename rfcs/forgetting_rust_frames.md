@@ -15,10 +15,13 @@ This RFC guarantees that the behavior of deallocating a Rust stack frame contain
 The [rlua] Rust library is called from C and it calls C code.
 Here, the C code [rlua] calls does a [longjmp] back to the C code that calls [rlua].
 
-On some platforms, `longjmp` dealocates the Rust frames without invoking destructors.
+On some platforms, [longjmp] dealocates the Rust frames without invoking destructors.
 
 Currently, we make no guarantees about the behavior of such Rust programs.
 This RFC changes that.
+
+[rlua]: https://github.com/kyren/rlua
+[longjmp]: https://en.cppreference.com/w/c/program/longjmp
 
 # Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
@@ -42,7 +45,7 @@ None known yet.
 # Rationale and alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
-We could decide not do this and that would mean that the behavior of `rlua` and similar crates remains undefined.
+We could decide not do this and that would mean that the behavior of [rlua] and similar crates remains undefined.
 
 # Prior art
 [prior-art]: #prior-art
@@ -64,3 +67,4 @@ like `Pin`).
 
 Other future RFCs could allow calling [setjmp] from Rust.
 
+[setjmp]: https://en.cppreference.com/w/c/program/setjmp
