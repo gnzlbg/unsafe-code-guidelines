@@ -15,7 +15,7 @@ This RFC guarantees that the behavior of deallocating a Rust stack frame contain
 The [rlua] Rust library is called from C and it calls C code.
 Here, the C code [rlua] calls does a [longjmp] back to the C code that calls [rlua].
 
-On some platforms, [longjmp] dealocates the Rust frames without invoking destructors.
+On some platforms, [longjmp] deallocates the Rust frames without invoking destructors.
 
 Currently, we make no guarantees about the behavior of such Rust programs.
 This RFC changes that.
